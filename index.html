@@ -115,7 +115,10 @@ for(let i=1;i<=12;i++){
  let people=['A','B','C','D','E'],rot=i%5,ordered=people.slice(rot).concat(people.slice(0,rot));
  add('Seating Arrangement','Reasoning','पाँच लोग बाएँ से दाएँ इस क्रम में बैठे हैं: '+ordered.join(', ')+'. बीच में कौन बैठा है?',ordered[2],'पाँच लोगों में तीसरी स्थिति बीच की होती है।',ordered.slice(0,4).includes(ordered[2])?ordered.slice(0,4):[ordered[0],ordered[1],ordered[2],ordered[4]]);
 }
-const COMPLETE_BANK=[...BANK,...GENERATED];
+// WEEKLY_QUESTIONS_START
+const WEEKLY_QUESTIONS=[];
+// WEEKLY_QUESTIONS_END
+const COMPLETE_BANK=[...BANK,...GENERATED,...WEEKLY_QUESTIONS];
 
 const TOPICS={full:['All Topics'],quant:['All Topics','Simplification','Number Series','Percentage','Profit & Loss','Simple & Compound Interest','Average','Time & Distance'],reason:['All Topics','Coding-Decoding','Direction Sense','Blood Relation','Syllogism','Inequality','Series','Seating Arrangement'],speed:['All Topics'],mixed:['All Topics'],weak:['All Topics'],previous:['All Topics']};
 const MODE_NAMES={full:'Full Mock Test',quant:'Quantitative Aptitude',reason:'Reasoning Ability',speed:'Speed Test',mixed:'Mixed Practice',weak:'Weak Topic Practice',previous:'Previous Year Pattern Practice'};
