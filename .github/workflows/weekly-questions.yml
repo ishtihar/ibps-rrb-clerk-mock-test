@@ -1,0 +1,44 @@
+name: Weekly RRB Question Refresh
+on:
+  schedule:
+    - cron: '30 3 * * 1' # Monday 09:00 IST (weekly)
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate and validate 100 new questions
+        run: python scripts/weekly_questions.py
+      - name: Commit question update
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html weekly-update.json
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Weekly refresh: 100 verified RRB practice questions"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Email update report
+        if: always()
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          MAIL_TO: ishtiharkhan@gmail.com
+          UPDATE_RESULT: ${{ job.status }}
+          UPDATE_CHANGED: ${{ steps.commit.outputs.changed }}
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: python scripts/send_update_email.py
