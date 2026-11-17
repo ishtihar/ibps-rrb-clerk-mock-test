@@ -1,10 +1,14 @@
-name: Weekly RRB Question Refresh
+name: Daily RRB Question Refresh
 on:
   schedule:
-    - cron: '30 3 * * 1' # Monday 09:00 IST (weekly)
+    - cron: '30 4 * * *' # 10:00 AM IST daily
+    - cron: '30 12 * * *' # 06:00 PM IST daily
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: rrb-question-refresh
+  cancel-in-progress: false
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -12,12 +16,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: '3.12'
-      - name: Generate and validate 100 new questions
-        run: python scripts/weekly_questions.py
-      - name: Commit question update
+          node-version: '22'
+      - name: Generate and validate 100 practice questions across 14 topics
+        run: node scripts/daily_questions.js
+      - name: Commit updated questions
         id: commit
         run: |
           git config user.name "github-actions[bot]"
@@ -26,19 +30,17 @@ jobs:
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "Weekly refresh: 100 verified RRB practice questions"
+            git commit -m "Daily RRB question refresh: 100 questions across 14 topics"
             git push
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
-      - name: Email update report
-        if: always()
+      - name: Email successful question update
+        if: ${{ success() && steps.commit.outputs.changed == 'true' }}
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
           SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          MAIL_TO: ishtiharkhan@gmail.com
-          UPDATE_RESULT: ${{ job.status }}
-          UPDATE_CHANGED: ${{ steps.commit.outputs.changed }}
-          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
-        run: python scripts/send_update_email.py
+          MAIL_TO: tamanathakur1999@gmail.com
+          REPO_URL: https://ishtihar.github.io/ibps-rrb-clerk-mock-test/
+        run: python3 scripts/send_update_email.py
