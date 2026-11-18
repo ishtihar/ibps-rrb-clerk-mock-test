@@ -1,18 +1,15 @@
 {
   "slot": "2026-11-18-6PM",
+  "generated_at_utc": "2026-11-18T13:18:06.439Z",
   "question_count": 100,
-  "sections": {
-    "Quantitative Aptitude": 50,
-    "Reasoning": 50
-  },
   "topics": {
     "Simplification": 8,
-    "Number Series": 8,
+    "Number Series": 7,
     "Percentage": 7,
     "Profit & Loss": 7,
     "Simple & Compound Interest": 7,
     "Average": 7,
-    "Time & Distance": 6,
+    "Time & Distance": 7,
     "Coding-Decoding": 8,
     "Direction Sense": 7,
     "Blood Relation": 7,
@@ -20,7 +17,5 @@
     "Inequality": 7,
     "Series": 7,
     "Seating Arrangement": 7
-  },
-  "question_commit": "c04253ef5d82eed77fb2113a55db9171a90d1db3",
-  "previous_slot": "2026-11-18-10AM"
+  }
 }
