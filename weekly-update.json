@@ -1,5 +1,5 @@
 {
-  "slot": "2026-11-18-10AM",
+  "slot": "2026-11-18-6PM",
   "question_count": 100,
   "sections": {
     "Quantitative Aptitude": 50,
@@ -12,8 +12,8 @@
     "Profit & Loss": 7,
     "Simple & Compound Interest": 7,
     "Average": 7,
-    "Coding-Decoding": 8,
     "Time & Distance": 6,
+    "Coding-Decoding": 8,
     "Direction Sense": 7,
     "Blood Relation": 7,
     "Syllogism": 7,
@@ -21,6 +21,6 @@
     "Series": 7,
     "Seating Arrangement": 7
   },
-  "question_commit": "6d1e5ded803586e63c72bd491ee969d975002ac3",
-  "validated_at_utc": "2026-11-18T04:31:51.397Z"
+  "question_commit": "c04253ef5d82eed77fb2113a55db9171a90d1db3",
+  "previous_slot": "2026-11-18-10AM"
 }
