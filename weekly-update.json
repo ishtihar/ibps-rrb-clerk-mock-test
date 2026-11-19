@@ -1,11 +1,7 @@
 {
   "slot": "2026-11-19-6PM",
-  "generated_at_utc": "2026-11-19T12:34:51.723Z",
+  "generated_at_utc": "2026-11-19T13:41:30.203Z",
   "question_count": 100,
-  "sections": {
-    "Quantitative Aptitude": 50,
-    "Reasoning": 50
-  },
   "topics": {
     "Simplification": 8,
     "Number Series": 7,
@@ -21,6 +17,5 @@
     "Inequality": 7,
     "Series": 7,
     "Seating Arrangement": 7
-  },
-  "question_commit": "ecd1f20ea2ecd360cf4203e15572130ce3b315b7"
+  }
 }
