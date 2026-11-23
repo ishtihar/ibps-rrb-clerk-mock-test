@@ -1,7 +1,9 @@
 {
-  "slot": "2026-11-23-10AM",
-  "generated_at_utc": "2026-11-22T19:53:35.894Z",
+  "slot": "2026-11-23-6PM",
+  "generated_at_utc": "2026-11-23T12:30:00Z",
   "question_count": 100,
+  "quant_count": 50,
+  "reasoning_count": 50,
   "topics": {
     "Simplification": 8,
     "Number Series": 7,
